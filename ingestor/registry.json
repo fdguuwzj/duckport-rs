@@ -90,5 +90,39 @@
         "empty_hint": "留空跳过"
       }
     ]
+  },
+  "binance-open-interest": {
+    "repo": "/Users/fdguu/code/duckport-binance-open-interest",
+    "description": "Binance USD-M 5-minute open-interest ingestor",
+    "exec": "binance-open-interest",
+    "default_instance": "binance-open-interest-5m",
+    "config": [
+      {
+        "name": "BACKFILL_DAYS",
+        "label": "历史回补天数",
+        "default": "30"
+      },
+      {
+        "name": "CONCURRENCY",
+        "label": "并发数",
+        "default": "8"
+      },
+      {
+        "name": "REQUEST_INTERVAL_SECONDS",
+        "label": "请求间隔秒数",
+        "default": "0.34"
+      },
+      {
+        "name": "POLL_DELAY_SECONDS",
+        "label": "周期延迟秒数",
+        "default": "30"
+      },
+      {
+        "name": "PROXY_URL",
+        "label": "PROXY_URL",
+        "default": "",
+        "empty_hint": "留空跳过"
+      }
+    ]
   }
 }

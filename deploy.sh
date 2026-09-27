@@ -185,9 +185,11 @@ BINARY_URL=$(_get_binary_url || true)
 
 if [[ -n "$BINARY_URL" ]]; then
   info "下载：$BINARY_URL"
-  curl -fsSL \
+  # --progress-bar：TTY 下显示进度条；-f 保留 HTTP 错误失败；不加 -s 以免静默掉进度
+  curl -fL --progress-bar \
     ${GITHUB_TOKEN:+-H "Authorization: Bearer ${GITHUB_TOKEN}"} \
     "$BINARY_URL" -o "$TMP_BIN"
+  echo
 else
   info "GitHub Release 暂无预构建包，尝试本机编译..."
   SRC_BIN=$(_build_from_source)
@@ -292,6 +294,9 @@ Group=root
 WorkingDirectory=/opt/duckport
 EnvironmentFile=/opt/duckport/server.env
 ExecStart=/opt/duckport/bin/duckport-server
+# SIGTERM → drain inflight RPCs → CHECKPOINT → exit 0
+KillSignal=SIGTERM
+TimeoutStopSec=60
 Restart=on-failure
 RestartSec=5
 LimitNOFILE=65536
@@ -315,6 +320,9 @@ WorkingDirectory=/opt/duckport/ingestors/%i
 EnvironmentFile=/opt/duckport/ingestors/%i/config.env
 Environment=INGESTOR_ENV_FILE=/opt/duckport/ingestors/%i/config.env
 ExecStart=/opt/duckport/bin/ingestor-run %i
+# Ingestor handles SIGTERM (client.close) before exit
+KillSignal=SIGTERM
+TimeoutStopSec=30
 Restart=on-failure
 RestartSec=10
 LimitNOFILE=65536

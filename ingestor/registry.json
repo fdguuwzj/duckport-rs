@@ -56,5 +56,39 @@
         "empty_hint": "留空跳过"
       }
     ]
+  },
+  "aster-ingestor": {
+    "repo": "/Users/fdguu/code/duckport-aster-ingestor",
+    "description": "Aster USDT-Perp K-line ingestor",
+    "exec": "aster-ingestor",
+    "default_instance": "aster-1h",
+    "config": [
+      {
+        "name": "KLINE_INTERVAL",
+        "label": "K 线周期",
+        "default": "1h"
+      },
+      {
+        "name": "DATA_SOURCES",
+        "label": "DATA_SOURCES",
+        "default": "aster_perp"
+      },
+      {
+        "name": "CONCURRENCY",
+        "label": "并发数",
+        "default": "2"
+      },
+      {
+        "name": "START_DATE",
+        "label": "START_DATE",
+        "default": "2021-09-01"
+      },
+      {
+        "name": "PROXY_URL",
+        "label": "PROXY_URL",
+        "default": "",
+        "empty_hint": "留空跳过"
+      }
+    ]
   }
 }

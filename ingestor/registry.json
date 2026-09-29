@@ -58,7 +58,7 @@
     ]
   },
   "aster-ingestor": {
-    "repo": "/Users/fdguu/code/duckport-aster-ingestor",
+    "repo": "https://github.com/fdguuwzj/duckport-aster-ingestor.git",
     "description": "Aster USDT-Perp K-line ingestor",
     "exec": "aster-ingestor",
     "default_instance": "aster-1h",
@@ -92,11 +92,16 @@
     ]
   },
   "binance-open-interest": {
-    "repo": "/Users/fdguu/code/duckport-binance-open-interest",
-    "description": "Binance USD-M 5-minute open-interest ingestor",
+    "repo": "https://github.com/fdguuwzj/duckport-binance-open-interest.git",
+    "description": "Binance USD-M open-interest ingestor (5m history or 1m snapshot)",
     "exec": "binance-open-interest",
     "default_instance": "binance-open-interest-5m",
     "config": [
+      {
+        "name": "OI_MODE",
+        "label": "采集模式 history/snapshot",
+        "default": "history"
+      },
       {
         "name": "BACKFILL_DAYS",
         "label": "历史回补天数",
